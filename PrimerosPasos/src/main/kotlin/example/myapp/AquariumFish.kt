@@ -30,6 +30,16 @@ class Plecostomus: FishAction, FishColor by GoldColor {
     }
 }
 
+sealed class Seal
+class SeaLion : Seal()
+class Walrus : Seal()
+
+fun matchSeal(seal: Seal): String {
+    return when(seal) {
+        is Walrus -> "walrus"
+        is SeaLion -> "sea lion"
+    }
+}
 
 //Ejemplo 1
 //class Shark: AquariumFish(), FishAction {
