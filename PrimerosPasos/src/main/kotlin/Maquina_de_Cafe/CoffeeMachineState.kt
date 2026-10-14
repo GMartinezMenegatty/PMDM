@@ -1,12 +1,12 @@
 package org.example.Maquina_de_Cafe
 
 sealed class CoffeeMachineState {
-    class Idle(val timestamp: Long = System.currentTimeMillis()) : CoffeeMachineState(){
+    class Idle(val timestamp: Long = System.currentTimeMillis()) : CoffeeMaquinaState(){
         init{
             println("Estoy en la función inicial del estado IDLE")
         }
     }
-    object MakingCoffee : CoffeeMachineState()
-    data class ServingCoffee(val type: String) : CoffeeMachineState()
-    data class Error(val message: String) : CoffeeMachineState()
+    object MakingCoffee : CoffeeMaquinaState()
+    data class ServingCoffee(val type: String) : CoffeeMaquinaState()
+    data class Error(val message: String) : CoffeeMaquinaState()
 }

@@ -2,14 +2,11 @@ package org.example.Maquina_de_Cafe
 
 fun main() {
     println("--- Encendiendo la máquina ---")
-    CoffeeMachine.makeCoffee()
+    CoffeeMachine.gestorEstados()
 
     println("\n--- Intentando hacer café de nuevo ---")
-    CoffeeMachine.makeCoffee()
-
-    println("\n--- Limpiando la máquina ---")
-    CoffeeMachine.clean()
+    CoffeeMachine.gestorEstados()
 
     println("\n--- Y ahora, otro café ---")
-    CoffeeMachine.makeCoffee()
+    CoffeeMachine.gestorEstados()
 }
