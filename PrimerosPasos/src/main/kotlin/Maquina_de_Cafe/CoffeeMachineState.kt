@@ -8,5 +8,6 @@ sealed class CoffeeMachineState {
     }
     object MakingCoffee : CoffeeMaquinaState()
     data class ServingCoffee(val type: String) : CoffeeMaquinaState()
+    data class SelectCoffee(val options: List<String>) : CoffeeMaquinaState()
     data class Error(val message: String) : CoffeeMaquinaState()
 }
