@@ -1,12 +1,18 @@
 package org.example.Maquina_de_Cafe
 
 fun main() {
-    println("--- Encendiendo la máquina ---")
+
+    // Simula la inserción de dinero en la máquina
+    println("---- Primera llamada ----")
+    CoffeeMachine.monedero = 1
     CoffeeMachine.gestorEstados()
 
-    println("\n--- Intentando hacer café de nuevo ---")
+    // Simula la eleccion de tipo de café
+    CoffeeMachine.seleccion = Bebidas.AMERICANO
+    println("---- Segunda llamada ----")
     CoffeeMachine.gestorEstados()
 
-    println("\n--- Y ahora, otro café ---")
+    println("---- Tercera llamada ----")
     CoffeeMachine.gestorEstados()
+
 }
