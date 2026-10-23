@@ -22,14 +22,14 @@ class MainTest {
         CoffeeMachine.monedero = 1.0
 
         assertEquals(
-            CoffeeMachineState.MakingCoffee(Cafe.nobebida),
+            CoffeeMachineState.MakingCoffee(Cafe.NOBEBIDA),
             CoffeeMachine.gestorEstados()
         )
 
-        CoffeeMachine.seleccion = Cafe.espresso
+        CoffeeMachine.seleccion = Cafe.ESPRESSO
 
         assertEquals(
-            CoffeeMachineState.ServingCoffee(Cafe.espresso),
+            CoffeeMachineState.ServingCoffee(Cafe.ESPRESSO),
             CoffeeMachine.gestorEstados()
         )
         assertEquals(CoffeeMachineState.Idle, CoffeeMachine.gestorEstados())
@@ -44,7 +44,7 @@ class MainTest {
 
     private fun resetMachine() {
         CoffeeMachine.monedero = 0
-        CoffeeMachine.seleccion = Cafe.nobebida
+        CoffeeMachine.seleccion = Cafe.NOBEBIDA
         CoffeeMachine.currentState = CoffeeMachineState.Idle
     }
 }
