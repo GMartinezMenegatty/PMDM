@@ -2,56 +2,57 @@ package org.example.Maquina_de_Cafe
 
 
 object CoffeeMachine {
-    var currentState: CoffeeMachineState = CoffeeMachineState.Idle
+    var currentState: CoffeeMaquinaState =
+        CoffeeMaquinaState.Idle
+
     var monedero: Double = 0.0
-    var seleccion: Cafe = Cafe.NOBEBIDA
+    var cafeSeleccionado: Cafe = Cafe.ESPRESSO
 
     fun gestorEstados() {
-        when(currentState) {
-            is CoffeeMachineState.Idle -> {
-                println("Por favor, inserta dinero en el monedero.")
-                currentState = CoffeeMachineState.SelectCoffee
+        when (currentState) {
+
+            CoffeeMaquinaState.Idle -> {
+                println("Máquina preparada.")
+                currentState =
+                    CoffeeMaquinaState.SelectCoffee
             }
 
-            is CoffeeMachineState.SelectCoffee -> {
-                println("Elige tu Café: 1. Espresso (1.5€) 2. Latte (2.0€) 3. Cappuccino (2.5€)")
-                monedero > 0
-                if (monedero == 1.5) {
-                    println("Café seleccionado. Preparando Espresso.")
-                    currentState = CoffeeMachineState.MakingCoffee
+            CoffeeMaquinaState.SelectCoffee -> {
+                val cafe = cafeSeleccionado
 
-                } else if (monedero == 2.0) {
-                    println("Café seleccionado. Preparando Latte.")
-                    currentState = CoffeeMachineState.MakingCoffee
+                if (cafe.cantidad > 0 &&
+                    monedero >= cafe.precio
+                ) {
+                    println("Café seleccionado: ${cafe.nombre}")
 
-                } else if (monedero == 2.5) {
-                        println("Café seleccionado. Preparando Cappuccino.")
-                        currentState = CoffeeMachineState.MakingCoffee
+                    monedero -= cafe.precio
+                    cafe.cantidad--
 
-                    } else {
-                        println("No hay suficiente dinero en el monedero.")
-                        currentState = CoffeeMachineState.Error
-                    }
+                    currentState =
+                        CoffeeMaquinaState.MakingCoffee
+                } else {
+                    println("No hay dinero suficiente o no queda café.")
+                    currentState = CoffeeMaquinaState.Error
                 }
+            }
 
-                is CoffeeMachineState.ServingCoffee -> {
-                    println("Sirviendo café.")
-                    currentState = CoffeeMachineState.Idle
-                }
+            CoffeeMaquinaState.MakingCoffee -> {
+                println("Preparando ${cafeSeleccionado.nombre}...")
+                currentState =
+                    CoffeeMaquinaState.ServingCoffee
+            }
 
-                is CoffeeMachineState.Error -> {
-                    println("Error en la máquina.")
-                    currentState = CoffeeMachineState.Idle
-                }
+            CoffeeMaquinaState.ServingCoffee -> {
+                println("Sirviendo ${cafeSeleccionado.nombre}.")
+                println("Cambio: $monedero €")
 
-                is CoffeeMachineState.MakingCoffee -> {
-                    println("Preparando café...")
-                    currentState = CoffeeMachineState.ServingCoffee
-                }
+                monedero = 0.0
+                currentState = CoffeeMaquinaState.Idle
+            }
 
-            else -> {
-                println("Estado desconocido.")
-                currentState = CoffeeMachineState.Idle
+            CoffeeMaquinaState.Error -> {
+                println("No se ha podido preparar el café.")
+                currentState = CoffeeMaquinaState.Idle
             }
         }
     }
